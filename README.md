@@ -62,7 +62,7 @@
 	        netview:textColor="#ff4c9c"
 	        netview:textSize="20dp"
 	        netview:count="7"
-	        netview:coast="5"/>
+	        netview:coats="5"/>
 
 	</RelativeLayout>
 
@@ -84,11 +84,11 @@
         netView.setTitles(titles);
         netView.setPercent(percent);
 		netView.setTextSize(20);
-		netView.setcoast="5"
+		netView.setCoats="5"
     }
 
 ##Download  添加依赖
 
  Gradle:
 
-	compile 'com.kevinmao.iview:netview:0.2'
+	compile 'com.kevinmao.iview:netview:0.3'
