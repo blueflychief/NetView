@@ -13,17 +13,17 @@
 
 * 这是个lib 不可直接运行 但可以当做lib导入 
 ##使用方法
-> ###支持属性：
->> 1. netColor 网的颜色
+###支持属性：
+>1. netColor 网的颜色
 2. overlayColor 生成覆盖区域的颜色
 3. overlayAlpha 覆盖区域的透明度
 4. textColor 文本的字体颜色
 5. textSize 文本的大小
 6. count 边的条数
 7. coats 网的层数
-#  #
-> ###支持方法：
->>1. setNetColor
+
+###支持方法：
+>1. setNetColor
 2. setCount
 3. textsize
 4. setTextColor
