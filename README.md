@@ -68,7 +68,7 @@
 
 ###Activity
 	private netView netView;
-	//count titles.length data.length  必须相等
+	//count titles.length data.length   必须相等
     private String[] titles = {"android", "javascript", "java", "python", "c++", "ios","swift"};
     private double[] data = {1, 0.4, 0.6, 0.5, 0.8, 0.3,0.2};
 
