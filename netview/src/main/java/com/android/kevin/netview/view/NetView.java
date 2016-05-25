@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -26,7 +27,7 @@ public class NetView extends View {
 	private int overlayAlpha; //覆盖物透明色
 	private int textColor;   //文字颜色
 	private float textSize;  //文件大小
-	private int coats ; //画几层 默认最少2层
+	private int coats; //画几层 默认最少2层
 
 
 	private NetViewAttrs netViewAttrs;
@@ -61,23 +62,13 @@ public class NetView extends View {
 
 		angle = (float) (Math.PI * 2 / count);  //2π = 360度
 
-		netPaint = new Paint();
-		netPaint.setAntiAlias(true);
-		netPaint.setColor(netColor);
-		netPaint.setStyle(Paint.Style.STROKE);
+		initNetPaint();
 
-		overlayPaint = new Paint();
-		overlayPaint.setAntiAlias(true);
-		overlayPaint.setColor(overlayColor);
-		overlayPaint.setAlpha(255);
-		overlayPaint.setStyle(Paint.Style.FILL);
+		initOverlayPaint();
 
-		textPaint = new Paint();
-		textPaint.setAntiAlias(true);
-		textPaint.setColor(textColor);
-		textPaint.setTextSize(textSize);
-		textPaint.setStyle(Paint.Style.STROKE);
+		initTextPaint();
 	}
+
 
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -92,7 +83,7 @@ public class NetView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		if (count != data.length || count != titles.length){
+		if (count != data.length || count != titles.length) {
 			throw new IllegalStateException("count, titles.length, data.length must equals");
 		}
 
@@ -101,7 +92,10 @@ public class NetView extends View {
 		drawTtitle(canvas);
 	}
 
-	//绘制蜘蛛网
+	/**
+	 * 绘制蜘蛛网
+	 * @param canvas 画布
+	 */
 	private void drawNet(Canvas canvas) {
 		Path path = new Path();
 		float r = radius / (coats - 1);
@@ -132,7 +126,10 @@ public class NetView extends View {
 		}
 	}
 
-	//画覆盖物
+	/**
+	 * 画覆盖物
+	 * @param canvas 画布
+	 */
 	private void drawOverlay(Canvas canvas) {
 		Path path = new Path();
 		for (int i = 0; i < count; i++) {
@@ -161,7 +158,10 @@ public class NetView extends View {
 
 	}
 
-	//画文字
+	/**
+	 * 画文字
+	 * @param canvas 画布
+	 */
 	private void drawTtitle(Canvas canvas) {
 		Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
 		float fontHeight = fontMetrics.descent - fontMetrics.ascent; //文字的高度
@@ -198,7 +198,7 @@ public class NetView extends View {
 
 			} else if (angle * i > Math.PI && angle * i < 1.5 * Math.PI) {//第3象限
 
-				canvas.drawText(titles[i], x - fontWidth - offSetpx, y + fontHeight /2, textPaint);
+				canvas.drawText(titles[i], x - fontWidth - offSetpx, y + fontHeight / 2, textPaint);
 
 			} else if (angle * i == Math.PI * 1.5) {//转动了 270 度 x < 0  y = 0
 
@@ -233,6 +233,7 @@ public class NetView extends View {
 
 	/**
 	 * 设置层数
+	 *
 	 * @param coats 画的层数
 	 */
 	public void setCoats(int coats) {
@@ -241,6 +242,7 @@ public class NetView extends View {
 
 	/**
 	 * 设置标题
+	 *
 	 * @param titles 标题
 	 */
 	public void setTitles(String[] titles) {
@@ -250,17 +252,26 @@ public class NetView extends View {
 
 	/**
 	 * 设置数据 小于1 大于0
+	 *
 	 * @param data 数据
 	 */
 	public void setData(double[] data) {
 		this.data = data;
 		setCount(titles.length);
 	}
-
-	public void setOverlayColor(int color) {
+	/**
+	 * 设置覆盖区域颜色
+	 * @param color 覆盖物颜色
+	 */
+	public void setOverlayColor(@ColorInt int color) {
 		this.overlayColor = color;
 	}
 
+
+	/**
+	 * 设置覆盖区域透明度
+	 * @param alpha 覆盖区域透明度
+	 */
 	public void setOverlayAlpha(int alpha) {
 		if (alpha < 0) {
 			this.overlayAlpha = 0;
@@ -271,10 +282,18 @@ public class NetView extends View {
 		}
 	}
 
-	public void setTextColor(int color) {
+	/**
+	 * 设置title 文字颜色
+	 * @param color 文字颜色
+	 */
+	public void setTextColor(@ColorInt int color) {
 		this.textColor = color;
 	}
 
+	/**
+	 * 设置title字体大小 dp
+	 * @param textsize 文字大小
+	 */
 	public void setTextSize(int textsize) {
 		if (DensityUtils.dpToPx(textsize, getContext()) < 10) {
 			this.textSize = DensityUtils.dpToPx(10, getContext());
@@ -285,8 +304,44 @@ public class NetView extends View {
 		}
 	}
 
-	public void setCount(int count){
+	/**
+	 * 设置网的边数
+	 * @param count 边数
+	 */
+	public void setCount(int count) {
 		this.count = count;
 		angle = (float) (Math.PI * 2 / count);
 	}
+
+	/**
+	 * 设置网的颜色
+	 * @param color 网的颜色
+	 */
+	public void setNetColor(@ColorInt int color) {
+		this.netColor = color;
+	}
+
+	private void initNetPaint() {
+		netPaint = new Paint();
+		netPaint.setAntiAlias(true);
+		netPaint.setColor(netColor);
+		netPaint.setStyle(Paint.Style.STROKE);
+	}
+
+	private void initOverlayPaint() {
+		overlayPaint = new Paint();
+		overlayPaint.setAntiAlias(true);
+		overlayPaint.setColor(overlayColor);
+		overlayPaint.setAlpha(255);
+		overlayPaint.setStyle(Paint.Style.FILL);
+	}
+
+	private void initTextPaint() {
+		textPaint = new Paint();
+		textPaint.setAntiAlias(true);
+		textPaint.setColor(textColor);
+		textPaint.setTextSize(textSize);
+		textPaint.setStyle(Paint.Style.STROKE);
+	}
+
 }
