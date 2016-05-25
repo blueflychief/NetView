@@ -26,7 +26,7 @@ public class NetView extends View {
 	private int overlayAlpha; //覆盖物透明色
 	private int textColor;   //文字颜色
 	private float textSize;  //文件大小
-	private int coats = 5; //画几层 默认5层
+	private int coats ; //画几层 默认最少2层
 
 
 	private NetViewAttrs netViewAttrs;
@@ -57,6 +57,7 @@ public class NetView extends View {
 		textColor = netViewAttrs.getTextColor();
 		textSize = netViewAttrs.getTextSize();
 		count = netViewAttrs.getCount();
+		coats = netViewAttrs.getCoats();
 
 		angle = (float) (Math.PI * 2 / count);  //2π = 360度
 

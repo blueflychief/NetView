@@ -7,5 +7,6 @@
         <attr name="textSize" format="dimension"/>
         <attr name="overlayAlpha" format="integer"/>
         <attr name="count" format="integer"/>
+        <attr name="coats" format="integer"/>
     </declare-styleable>
 </resources>

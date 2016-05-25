@@ -17,6 +17,7 @@ public class NetViewAttrs {
 	private int textColor;
 	private float textSize;
 	private int count;
+	private int coats;
 
 
 	public NetViewAttrs(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -27,6 +28,7 @@ public class NetViewAttrs {
 		textColor = ta.getColor(R.styleable.net_textColor, Color.parseColor("#ff4c9c"));
 		textSize = ta.getDimension(R.styleable.net_textSize, 20);
 		count = ta.getInt(R.styleable.net_count, 7);
+		coats =  ta.getInt(R.styleable.net_coats,2);
 		ta.recycle();
 	}
 
@@ -56,4 +58,6 @@ public class NetViewAttrs {
 	public int getCount() {
 		return count;
 	}
+
+	public int getCoats(){return coats;}
 }
