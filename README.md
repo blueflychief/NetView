@@ -11,8 +11,10 @@
 * 在 [xsfelvis](https://github.com/xsfelvis/NetView) 的基础上做了修改， 增加了可自定义多边形，自定义画的层数，画图起点是从90度开始画
 等等 其它修改
 
-* 这是个lib 不可直接运行 但可以当做lib导入 
+* 这是个lib 不可直接运行 但可以当做lib导入
+---
 ##使用方法
+
 ###支持属性：
 >1. netColor 网的颜色
 2. overlayColor 生成覆盖区域的颜色
